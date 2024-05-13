@@ -1,9 +1,15 @@
-import React from 'react'
+import React from "react";
 
-function User() {
+function User({ user }) {
   return (
-    <div>User</div>
-  )
+    <div>
+      <ul>
+        {user.map((u) => (
+          <li key={u.id}>{u.name}</li>
+        ))}
+      </ul>
+    </div>
+  );
 }
 
-export default User
+export default User;
