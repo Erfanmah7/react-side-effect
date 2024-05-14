@@ -20,22 +20,9 @@ function User() {
     fetchData();
   }, []);
 
-  const clickHandler = async () => {
-    const res = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`);
-    const json = await res.json();
-    console.log(json);
-  };
-
   return (
     <div>
-      {id > 10 && <Counter />}
       <input type="text" value={id} onChange={(e) => setId(e.target.value)} />
-      <button onClick={clickHandler}>search</button>
-      <ul>
-        {user.map((u) => (
-          <li key={u.id}>{u.name}</li>
-        ))}
-      </ul>
     </div>
   );
 }
