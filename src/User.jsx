@@ -7,18 +7,27 @@ function User() {
   const [id, setId] = useState("");
 
   useEffect(() => {
+    const controller = new AbortController();
     const fetchData = async () => {
       try {
-        const res = await fetch("https://jsonplaceholder.typicode.com/users");
+        const res = await fetch(
+          `https://jsonplaceholder.typicode.com/photos/${id}`,
+          { signal: controller.signal }
+        );
         const json = await res.json();
         setUser(json);
-      } catch (errorr) {
-        console.log(errorr);
+        console.log("seconde");
+        console.log(json);
+      } catch (error) {
+        if (error.name !== "AbortError") console.log("error");
       }
     };
-
     fetchData();
-  }, []);
+    return () => {
+      controller.abort();
+      console.log("first");
+    };
+  }, [id]);
 
   return (
     <div>
